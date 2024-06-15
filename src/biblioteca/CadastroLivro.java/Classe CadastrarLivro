@@ -1,0 +1,68 @@
+package biblioteca;
+
+import javax.swing.JOptionPane;
+
+public class CadastroLivro {
+
+	private String titulo;
+	private String autor;
+	private String genero;
+	private int qtdDisponivel;
+	
+	public void cadastrarLivro(String titulo, String autor, String genero, int qtdDisponivel) {
+		
+		this.titulo = titulo;
+		this.autor = autor;
+		this.genero = genero;
+		this.qtdDisponivel = qtdDisponivel;
+		
+	}
+
+	public static boolean emprestarLivro(String livro) {
+
+		if (!livro.equals(0)) {
+			JOptionPane.showMessageDialog(null,"Livro esta liberado!");
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null,"Não há livro disponível");
+			return false;
+		}
+	}
+
+	public static void devolverLivro(String livro) {
+
+		JOptionPane.showMessageDialog(null,"O " + livro + " foi recebido com sucesso!");
+	}
+
+	public int getQtdDisponivel() {
+		return qtdDisponivel;
+	}
+
+	public void setQtdDisponivel(int qtdDisponivel) {
+		this.qtdDisponivel = qtdDisponivel;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+}
