@@ -1,0 +1,108 @@
+package biblioteca;
+
+import javax.swing.JOptionPane;
+
+public class Biblioteca {
+
+	public static void main(String[] args) {
+		String lerLivro = "";
+
+		CadastroLivro[] livro = new CadastroLivro[4];
+		CadastroUsuario[] usuario = new CadastroUsuario[3];
+
+		livro[0] = new CadastroLivro();
+		livro[0].setTitulo("Bela e a Fera");
+		livro[0].setAutor("Gabrielle Suzanne");
+		livro[0].setGenero("Fantasia");
+		livro[0].setQtdDisponivel(1);
+
+		livro[1] = new CadastroLivro();
+		livro[1].setTitulo("Pai Rico Pai Pobre");
+		livro[1].setAutor("Robert Kiyosaki");
+		livro[1].setGenero("Finanças pessoais");
+		livro[1].setQtdDisponivel(2);
+
+		livro[2] = new CadastroLivro();
+		livro[2].setTitulo("Shakespeare");
+		livro[2].setAutor("William Shakespeare");
+		livro[2].setGenero("Romance");
+		livro[2].setQtdDisponivel(3);
+
+		usuario[0] = new CadastroUsuario();
+		usuario[0].setNome("Lincon Mello");
+		usuario[0].setRgm("32720335");
+
+		usuario[1] = new CadastroUsuario();
+		usuario[1].setNome("João Sampaio");
+		usuario[1].setRgm("11254836");
+
+		usuario[2] = new CadastroUsuario();
+		usuario[2].setNome("Pedro Rocha");
+		usuario[2].setRgm("32458977");
+
+		while (true) {
+			int aux = Integer.parseInt(JOptionPane.showInputDialog(
+					"Seja bem, vindo a biblioteca M2!\n" + "Digite 1 para emprestar ou 2 para devolver um livro: "));
+			if (aux == 1) {
+				int i = 1;
+				for (CadastroLivro lerVetor : livro) {
+					if (lerVetor != null) {
+						lerLivro += "Livro " + i + ": " + lerVetor.getTitulo() + "\n";
+						i += 1;
+					}
+				}
+				int tamanhoArrayLivro = livro.length;
+				while (true) {
+					aux = Integer.parseInt(JOptionPane.showInputDialog("Livros disponiveis: \n" + lerLivro
+							+ "\n Digite o numero do livro que deseja emprestar: "));
+
+					if (aux != 0 && aux <= tamanhoArrayLivro) {
+						while (true) {
+
+							aux = aux - 1;
+							int aux1 = Integer.parseInt(
+									JOptionPane.showInputDialog("Você selecionou o livro: " + livro[aux].getTitulo()
+											+ "\nDigite 1 para continuar ou 0 para escolher outro livro."));
+							if (aux1 != 1) {
+								break;
+							} else {//estou tendo dificuldade neste bloco. ultima conversa com o gpt, ele explicou porem não deu tempo de eu analisar.
+								int a = 1;
+								String lerArrayUsuario = "";
+								String rgmCliente = JOptionPane.showInputDialog("Digite seu RGM: ");
+								for (CadastroUsuario lerUsuario : usuario) {
+									lerArrayUsuario += lerUsuario;
+									a += 1;
+									if (!lerArrayUsuario.contains(rgmCliente)) {
+										JOptionPane.showMessageDialog(null, "RGM inválido!\nDigite um RGM válido.");
+
+									} else {
+										a = a - 1;
+										int aux2 = Integer.parseInt(JOptionPane.showInputDialog("Usuario : "
+												+ usuario[a].getNome()
+												+ "\nO usuário está correto ?\nDigite 1 para confirmar ou 0 para cancelar."));
+										if (aux2 == 1) {
+											JOptionPane.showMessageDialog(null,
+													"Emprestimo realizado com sucesso!!! \n\nUsuário: "
+															+ usuario[a].getNome() + "Livro escolhido: "
+															+ livro[a].getTitulo());
+										} else {
+											break;
+										}
+									}
+								}
+							}
+
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Livro não encontrado, digite um número válido!");
+					}
+				}
+			} else if (aux == 2) {
+				JOptionPane.showMessageDialog(null, "Opção escolhida: Devolução de Livro.");
+				break;
+			} else {
+				JOptionPane.showMessageDialog(null, "Digite um número válido!");
+			}
+		}
+	}
+}
